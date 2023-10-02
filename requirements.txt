@@ -1,0 +1,12 @@
+Flask
+Flask-MySQLdb
+Flask-WTF
+WTForms
+passlib
+tensorflow
+numpy
+Pillow
+pdfkit
+Flask-Mail
+opencv-python
+email-validator

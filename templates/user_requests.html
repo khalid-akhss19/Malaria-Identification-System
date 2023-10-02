@@ -1,0 +1,43 @@
+{% extends 'user_layout.html' %}
+
+{% block body %}
+<section id="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="active"> User Requests</li>
+      </ol>
+</section>
+  <div class="table-responsive">
+
+    <table class='table table-hover'>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email Address</th>
+        <th>Speciality</th>
+        <th></th>
+        <th></th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.speciality}}</td>
+        <td>
+          <form class='accept-form' action="{{url_for('acceptUser',id=user.id)}}" method="post">
+             <input type="submit" class='btn btn-default pull-right' value="Accept">
+          </form>
+        </td>
+        <td>
+          <form class="delete-form" action="{{url_for('deleteUserRequest',id=user.id)}}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="submit" class='btn btn-danger' value="Delete">
+          </form>
+        </td>
+      </tr>
+      {% endfor%}
+    </table>
+
+  </div>
+
+{% endblock %}

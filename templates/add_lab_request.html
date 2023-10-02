@@ -1,0 +1,125 @@
+{% extends 'user_layout.html'  %}
+
+
+{%  block body  %}
+
+        <!-- BreadCrumb -->
+        <section id="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="active"><a href="/lab_tests">Type of Lab Tests</a> / <a href="/test_under/{{ test_data.type_id }}">{{ test_data.test_type_name }}</a> / {{ test_data.test_name }} </li>
+        </ol>
+        </section>
+
+        <form method="post" style="width:85%;margin:0 auto; padding: 1.2em; border: 1px solid #ccc; border-radius: 6px;">
+
+          <h1>Add Lab Request</h1>
+          <br>
+
+          <!-- Nav-Tabs -->
+          <ul class="nav nav-tabs">
+            <li id="labRequest" class="active"><a href="#">Lab Request</a></li>
+          </ul>
+          <br>
+
+          <div class="form-group">
+
+            <label>Patient</label>
+
+                {{ form.patient(class="form-control")}}
+                {% if form.patient.errors %}
+
+                  <ul class='errors'>
+
+                    {% for error in form.patient.errors %}
+                        <li class='text-danger'>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+
+                {% endif %}
+
+          </div>
+
+          <div class="form-group">
+            <label for="">Urgency Level</label>
+
+               {{ form.urgency(placeholder="Test Value", class="form-control")}}
+               {% if form.urgency.errors %}
+
+                 <ul class='errors'>
+
+                   {% for error in form.urgency.errors %}
+                       <li class='text-danger'>{{ error }}</li>
+                   {% endfor %}
+                 </ul>
+
+               {% endif %}
+          </div>
+
+          <div class="form-group">
+
+            <label>Request Date</label>
+
+                {{ form.request_date(class="form-control datetime-check")}}
+                {% if form.request_date.errors %}
+
+                  <ul class='errors'>
+
+                    {% for error in form.request_date.errors %}
+                        <li class='text-danger'>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+
+                {% endif %}
+
+          </div>
+          <p id="date-error" class='text-danger'></p>
+
+           <input class="btn btn-primary" type="Submit" name="lab_request" value="Submit">
+        </form>
+
+
+        <script type="text/javascript">
+
+          $(document).ready(function()
+          {
+              $('.datetime-check').keyup(function()
+              {
+                  let inputDate = new Date($(this).val());
+
+                  let currentDate = new Date();
+
+                  // To calculate the time difference of two dates
+                  let Difference_In_Time = inputDate.getTime() - currentDate.getTime();
+
+                  // To calculate the no. of days between two dates
+                  let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+                  console.log(Difference_In_Days);
+
+                  if(inputDate < currentDate)
+                  {
+                    $('#date-error').text('This is lower than the current date');
+                    $(':submit').attr('disabled',true);
+                  }
+                  else if((inputDate.getHours() > 22) || inputDate.getHours() < 7)
+                  {
+                    $('#date-error').text('This is outside working hours (8AM to 11PM)');
+                    $(':submit').attr('disabled',true);
+                  }
+                  else if(Difference_In_Days > 14)
+                  {
+                    $('#date-error').text('Date should be under the next 2 weeks');
+                    $(':submit').attr('disabled',true);
+                  }
+                  else
+                  {
+                    $('#date-error').text('');
+                    $(':submit').removeAttr('disabled');
+                  }
+              });
+          });
+
+        </script>
+
+
+{% endblock %}

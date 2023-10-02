@@ -1,0 +1,49 @@
+{% extends 'user_layout.html' %}
+
+{% block patients %}
+
+  <div class="table-responsive">
+    <h1 style="margin-bottom: 20px;">All Physicians</h1>
+
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>CNIC</th>
+                <th>Speciality</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Usertype</th>
+                <th>Register Date</th>
+                <th></th>
+            </tr>
+
+            {% for user in user %}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.cnic}}</td>
+                    <td>{{user.speciality}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.user_type}}</td>
+                    <td>{{user.register_date}}</td>
+
+                    <td>
+
+                        <form class='.delete-form' action="{{url_for('delete_user', id=user.id)}}" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+
+                    </td>
+
+
+                </tr>
+            {% endfor %}
+
+        </table>
+
+  </div>
+
+{% endblock %}

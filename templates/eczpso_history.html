@@ -1,0 +1,28 @@
+{% extends 'user_layout.html' %}
+
+{% block body %}
+<section id="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="active"> Patient History</li>
+      </ol>
+</section>
+{% for info in history %}
+<div class="panel panel-default light-shadow" id='eczpso-history'>
+  <div class="panel-body">
+      <div class="row">
+        <!-- <div class="col-md-2">
+          <img src="{{ '/'+info.image }}" width="150" height="100">
+        </div> -->
+        <div class="col-md-3">
+          <h4><b class='text-primary'>Classification : </b><span class='label label-warning'>{{ info.disease_name }}</span></h4>
+          <h6><b>Created at : {{info.create_date}}</b></h6>
+          <a href="/eczpso_pdf/{{info.disease_id}}" target='_blank' class='btn btn-danger btn-sm'>Generate Report</a>
+        </div>
+      </div>
+
+  </div>
+
+</div>
+{% endfor %}
+
+{% endblock %}

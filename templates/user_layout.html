@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="canonical" href="https://getbootstrap.com/docs/3.3/examples/dashboard/">
+
+    <title>User</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/dashboard.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+
+    <!-- Including CSS and Bootstrap-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+  </head>
+
+  <body id='dashboard-bg'>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid" >
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a  id='sidebar-button' class="navbar-brand visible-xs" href="#"><span class='fa fa-bars icon-md'></span></a>
+          <a class="navbar-brand" href="/">Malaria Identification </a>
+          
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class='nav navbar-nav navbar-left'>
+            <li><a href="/">Home</a></li>
+            
+            {% if session.user_type == 1 %}
+            <li><a href="/admin">Admin</a></li>
+            {% elif session.user_type == 0 %}
+            <li><a href="/dashboard">Doctor</a></li>
+            {% endif %}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if session.logged_in %}
+                  <li><a href="/profile"> Welcome {{session.username}} <span class="fa fa-user " ></span> </a> </li>
+                  <li><a href="/logout">Logout</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 col-lg-2 sidebar" style="background-color: #000C57;">
+          <ul class="nav nav-sidebar">
+            {% if session.user_type == 1 %}
+            <li {% if url_for(request.endpoint) == '/admin' %} class="active" {% else %} class='inactive'  {% endif %}><a href="/admin"><span class="fa fa-dashboard icon-md sidebariconn"></span> <span class='sidebar-option-name sidebariconn'>Overview</span></a></li>
+
+            <li {% if url_for(request.endpoint) == '/user_requests'%} class="active" {% else %} class='inactive'  {% endif %}><a href="/user_requests"><span class="fa fa-bell-o icon-md sidebariconn" ></span> <span class='sidebar-option-name sidebariconn' >Requests</span></a>
+            </li>
+            <li {% if url_for(request.endpoint) == '/user'%} class="active" {% else %} class='inactive'  {% endif %}><a href="/user"><span class="fa fa-users icon-md sidebariconn"></span> <span class='sidebar-option-name sidebariconn'  >Users</span></a></li>
+
+            {% elif session.user_type == 0 %}
+
+            <li {% if request.endpoint == 'patients' %} class="active" {% else %} class='inactive' {% endif %}><a href="/patients"><span class="fa fa-users icon-md sidebariconn"></span> <span class='sidebar-option-name sidebariconn'>Patients</span></a></li>
+
+            <li {% if request.endpoint == 'classify' %} class="active" {% else %} class='inactive' {% endif %}><a href="/classify"><span class="fa fa-search icon-md sidebariconn" ></span> <span class='sidebar-option-name sidebariconn'>Analysis</span></a></li>
+
+            <!-- <li {% if request.endpoint == 'labTests' %} class="active" {% else %} class='inactive' {% endif %}><a href="/lab_tests"><span class="fa fa-flask icon-md sidebariconn"></span> <span class='sidebar-option-name sidebariconn'>Type of Lab Tests</span></a></li> -->
+            <!-- <li {% if request.endpoint == 'labReports' %} class="active" {% else %} class='inactive' {% endif %}><a href="/lab_reports"><span class="fa fa-file-pdf-o icon-md sidebariconn"></span> <span class='sidebar-option-name sidebariconn'>Lab Reports</0span></a></li> -->
+
+            {% endif %}
+          </ul>
+
+        </div>
+
+        <div id="hidden-sidebar" class="main col-xs-12 hidden-sm hidden-md hidden-lg hidden-xs">
+          <div class="container">
+            <ul class="nav nav-sidebar">
+              {% if session.user_type == 1 %}
+              <li {% if url_for(request.endpoint) == '/admin' %} class="active" {% else %} class='inactive'  {% endif %}><a href="/admin"><span class="fa fa-dashboard icon-md"></span> <span class='sidebar-option-name'>Overview</span></a></li>
+              <li {% if url_for(request.endpoint) == '/user_requests'%} class="active" {% else %} class='inactive'  {% endif %}><a href="/user_requests"><span class="fa fa-bell-o icon-md"></span> <span class='sidebar-option-name'>Requests</span></a></li>
+              <li {% if url_for(request.endpoint) == '/user'%} class="active" {% else %} class='inactive'  {% endif %}><a href="/user"><span class="fa fa-users icon-md"></span> <span class='sidebar-option-name'>Users</span></a></li>
+              {% elif session.user_type == 0 %}
+              <li {% if request.endpoint == 'patients' %} class="active" {% else %} class='inactive' {% endif %}><a href="/patients"><span class="fa fa-users icon-md"></span> <span class='sidebar-option-name'>Patients</span></a></li>
+              <li {% if request.endpoint == 'classify' %} class="active" {% else %} class='inactive' {% endif %}><a href="/classify"><span class="fa fa-search icon-md"></span> <span class='sidebar-option-name'>Classify</span></a></li>
+              <li {% if request.endpoint == 'labReports' %} class="active" {% else %} class='inactive' {% endif %}><a href="/lab_reports"><span class="fa fa-file-pdf-o icon-md"></span> <span class='sidebar-option-name'>Lab Reports</span></a></li>
+              <li {% if request.endpoint == 'labTests' %} class="active" {% else %} class='inactive' {% endif %}><a href="/lab_tests"><span class="fa fa-flask icon-md"></span> <span class='sidebar-option-name'>Lab Tests</span></a></li>
+
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+
+        <div id='content' class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            {% block profile %}{% endblock %}
+             {% block patients %}{% endblock %}
+
+             {% block user %}{% endblock %}
+            {% include 'includes/_messages.html' %}
+              {% block body %}{% endblock %}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+  $(document).ready(function()
+  {
+
+  $(".accept-form, .delete-form").submit(function(e){
+        check = confirm('Are you sure?');
+
+        if(check)
+        {
+
+        }
+        else
+        {
+          e.preventDefault();
+        }
+   });
+
+
+
+
+
+
+
+
+    $('#sidebar-button').on('click',function()
+  {
+      $('#content').toggleClass('hidden-xs');
+      $('.sidebar').toggleClass('hidden-xs');
+      $('#hidden-sidebar').toggleClass('hidden-xs');
+
+  });
+
+    $( window ).resize(function() {
+      var screenSize= $( window ).width();
+
+      if(screenSize<=768)
+      {
+        $('.sidebar').css('position','absolute');
+
+      }
+
+
+    });
+
+  });
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+{% extends 'user_layout.html'  %}
+
+
+{%  block body  %}
+
+        <!-- BreadCrumb -->
+        <section id="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="active"><a href="/lab_tests">Type of Lab Tests</a> / <a href="/test_under/{{ test_data.type_id }}">{{ test_data.test_type_name }}</a> / {{ test_data.test_name }} </li>
+        </ol>
+        </section>
+
+        <form method="post" style="width:85%;margin:0 auto; padding: 1.2em; border: 1px solid #ccc; border-radius: 6px;">
+
+          <h1>Add Lab Report</h1>
+          <br>
+
+          <!-- Nav-Tabs -->
+          <ul class="nav nav-tabs">
+            <li id="labReport" class="active"><a href="#">Lab Report</a></li>
+          </ul>
+          <br>
+
+          <div class="form-group">
+
+            <label>Patient</label>
+
+                {{ form.patient(class="form-control")}}
+                {% if form.patient.errors %}
+
+                  <ul class='errors'>
+
+                    {% for error in form.patient.errors %}
+                        <li class='text-danger'>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+
+                {% endif %}
+
+          </div>
+
+          <div class="form-group">
+            <label for="">Test Value</label>
+
+               {{ form.test_value(placeholder="Test Value", class="form-control")}}
+               {% if form.test_value.errors %}
+
+                 <ul class='errors'>
+
+                   {% for error in form.test_value.errors %}
+                       <li class='text-danger'>{{ error }}</li>
+                   {% endfor %}
+                 </ul>
+
+               {% endif %}
+          </div>
+
+           <input class="btn btn-primary" type="Submit" name="lab_report" value="Submit">
+        </form>
+
+
+{% endblock %}

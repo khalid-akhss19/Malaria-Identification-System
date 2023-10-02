@@ -1,0 +1,45 @@
+{% extends 'user_layout.html' %}
+
+{% block profile %}
+
+    <div class="container-fluid" style="float: right; margin-top: 30px; margin-bottom: 20px;">
+    </div>
+    <br>
+    <br>
+
+    <div class="container-fluid" style="margin-top: 20px;">
+
+        <table class="table table-bordered">
+        {% for user in user %}
+              <tr>
+                <th>ID:</th>
+                <td> {{user.id}}</td>
+              </tr>
+
+              <tr>
+                <th>Full Name:</th>
+                <td> {{user.name}}</td>
+              </tr>
+
+              <tr>
+                <th>CNIC:</th>
+                <td> {{user.cnic}}</td>
+              </tr>
+
+              <tr>
+                <th>Speciality:</th>
+                <td> {{user.speciality}}</td>
+              </tr>
+
+              <tr>
+                <th>Username:</th>
+                <td> {{user.username}}</td>
+              </tr>
+
+
+        {% endfor %}
+
+
+          </table>
+    </div>
+{% endblock %}

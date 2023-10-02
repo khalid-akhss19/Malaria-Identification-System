@@ -1,0 +1,187 @@
+{% extends 'user_layout.html'  %}
+
+
+{%  block body  %}
+
+<!-- BreadCrumb -->
+<section id="breadcrumb">
+<ol class="breadcrumb">
+  <li class="active">Lab Reports</li>
+</ol>
+</section>
+
+    <div class="panel panel-default my-panel-primary light-shadow my-3">
+
+      <div class="panel-heading">
+          <h1 class='panel-title text-center'>Select Lab Report(s)</h1>
+      </div>
+
+      <div class="panel-body">
+
+        <form class="" action="/lab_report_pdf" method="post" target='_blank'>
+          {{ form.csrf_token }}
+          <div class="row">
+            <div class="col-md-4 col-md-offset-1 col-sm-12">
+              <div class="form-group">
+
+                <label>Patient Name</label>
+
+                    {{ form.patient(class="form-control")}}
+                    {% if form.patient.errors %}
+
+                      <ul class='errors'>
+
+                        {% for error in form.patient.errors %}
+                            <li class='text-danger'>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+
+                    {% endif %}
+
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+
+                <label>Report Date</label>
+
+                    {{ form.report_date(class="form-control")}}
+                    <p id='noDate' class='text-danger my-1'></p>
+                    {% if form.report_date.errors %}
+
+                      <ul class='errors'>
+                        {% for error in form.report_date.errors %}
+                            <li class='text-danger'>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+
+                    {% endif %}
+
+              </div>
+            </div>
+
+            <div class="col-md-2 col-sm-12 my-3">
+              <input class="btn btn-danger" type="Submit" name="" value="Generate PDF">
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+
+
+    </div>
+
+    <!--div class='table-responsive'>
+    <table class="table table-striped light-shadow">
+        <tr>
+            <th>Patient ID</th>
+            <th>Patient Name</th>
+            <th>Test Name</th>
+            <th>Lower Limit</th>
+            <th>Upper Limit</th>
+            <th>Test Value</th>
+            <th>Unit</th>
+            <th></th>
+        </tr>
+
+        <tr>
+          <td>1</td>
+          <td>John Doe</td>
+          <td>Physical Examination</td>
+          <td>0.50</td>
+          <td>1.00</td>
+          <td>1.10</td>
+          <td>\cmmm</td>
+          <td><a class='btn btn-danger' href="#">Generate PDF</a></td>
+        </tr>
+
+        <tr>
+          <td>1</td>
+          <td>John Doe</td>
+          <td>Physical Examination</td>
+          <td>0.50</td>
+          <td>1.00</td>
+          <td>1.10</td>
+          <td>\cmmm</td>
+          <td><a class='btn btn-danger' href="#">Generate PDF</a></td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>John Doe</td>
+          <td>Physical Examination</td>
+          <td>0.50</td>
+          <td>1.00</td>
+          <td>1.10</td>
+          <td>\cmmm</td>
+          <td><a class='btn btn-danger' href="#">Generate PDF</a></td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>John Doe</td>
+          <td>Physical Examination</td>
+          <td>0.50</td>
+          <td>1.00</td>
+          <td>1.10</td>
+          <td>\cmmm</td>
+          <td><a class='btn btn-danger' href="#">Generate PDF</a></td>
+        </tr>
+    </table>
+    </div-->
+
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+
+    $('form').submit(function(e)
+    {
+        report_date = $('#report_date').val();
+
+        if(report_date ==  null)
+        {
+            e.preventDefault();
+            $('#noDate').text('No report date of patient found');
+        }
+
+
+    });
+
+      function generateReportDates()
+      {
+        $.ajax({
+
+            data: {
+                      patient: $('#patient').val()
+                  },
+            type : 'POST',
+            url: '/process',
+            error: function(){ alert('error'); }
+
+        }).done(function(data)
+        {
+            //$("#report_date").html(`<option>${data.one}</option><option>${data.two}</option>`);
+
+            $('#report_date').empty();
+
+            for (let i = 0; i < data.length; i++)
+            {
+              $('#report_date').append(`<option value="${data[i].report_date}">${data[i].report_date}</option>`);
+            }
+
+        });
+
+      }
+
+      generateReportDates();
+
+      $("#patient").on('change',function(e){
+
+      generateReportDates();
+
+      });
+  });
+
+</script>
+
+{% endblock %}

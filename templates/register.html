@@ -1,0 +1,444 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+    <div class="auth" id='signUp'>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class='panel-title' style="text-align: center;">Sign Up</h3>
+        </div>
+        <div class="panel-body">
+          {% from "includes/_formhelpers.html" import render_field %}
+          <form class="" action="" method="post">
+            <div class="form-group">
+              {{render_field(form.name,class="form-control",placeholder = "Enter Full Name",id="name")}}
+              <p id="name_msg"></p>
+            </div>
+            <div class="form-group">
+              {{render_field(form.email,class="form-control",placeholder = "Enter Email Address",id="email")}}
+              <p id="email_msg"></p>
+            </div>
+            <div class="form-group">
+              {{render_field(form.cnic,class="form-control",placeholder = "Enter CNIC Number.",id="cnic")}}
+              <p id="cnic_msg"></p>
+            </div>
+            <div class="form-group">
+              {{render_field(form.speciality,class="form-control",placeholder = "Enter Doctor's Speciality.",id="spec")}}
+              <p id="spec_msg"></p>
+            </div>
+            <div class="form-group">
+              {{render_field(form.username,class="form-control",placeholder = "Enter Username.",id="username")}}
+              <p id="username_msg"></p>
+            </div>
+            <div class="form-group">
+              {{render_field(form.password,class="form-control",placeholder = "Enter Password. (1 Uppercase, 1 Number, 1 Special Character)",id="password")}}
+              <p id="password_msg"></p>
+            </div>
+            <div class="form-group">
+              {{render_field(form.confirm,class="form-control",placeholder = "Confirm Password.",id="con_password")}}
+              <p id="con_password_msg"></p>
+            </div>
+            <p style="text-align: center;"><input id="submit-btn" class='btn btn-primary' type="submit" value="Submit"></p>
+            <p style="text-align: center;">Already have an account? <a href="/login">Sign In</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Form Validation using JQuery-->
+    <script>
+      $(document).ready(function(){
+
+        // <First_Name_Validation> start
+        $('#name_msg').hide();
+
+        var nameErr = true;
+
+        $('#name').keyup(function(){//keyup executes the function by key press
+            name_check(); //function to validate fname
+        });
+
+        function name_check(){
+
+            var name = $('#name').val();
+
+            if(name.length == " " ){
+                $('#name_msg').show();
+                $('#name_msg').html("Please Enter Full Name.");//overrides
+                $('#name_msg').focus();
+                $('#name_msg').css("color","red");
+                nameErr = false;
+                return false;
+            }
+            else{
+                $('#name_msg').hide();
+            }
+
+            if(name.length > 50 ){
+                $('#name_msg').show();
+                $('#name_msg').html("Max: 50 Characters allowed.");//overrides
+                $('#name_msg').focus();
+                $('#name_msg').css("color","red");
+                nameErr = false;
+                return false;
+            }
+            else{
+                $('#name_msg').hide();
+            }
+
+            if(name.match(/^\d/)){   //for numeric validation when starting name
+                $('#name_msg').show();
+                $('#name_msg').html("Name should start with alphabet.");//overrides
+                $('#name_msg').focus();
+                $('#name_msg').css("color","red");
+                nameErr = false;
+                return false;
+            }
+            else{
+                $('#name_msg').hide();
+            }
+
+            if((name.match(/^\W/)) || (name.match("^[_]$")) ){    //for special characters validation when starting name
+                $('#name_msg').show();
+                $('#name_msg').html("Name should start with alphabet.");//overrides
+                $('#name_msg').focus();
+                $('#name_msg').css("color","red");
+                nameErr = false;
+                return false;
+            }
+            else{
+                $('#name_msg').hide();
+            }
+            
+        }
+    //</First_Name_Validation> ends
+
+
+
+    //<Email_Validation> starts
+      $('#email_msg').hide();
+    
+      var emailErr = true;
+
+      $('#email').keyup(function(){ //function executes by keyup
+        email_check(); //function to check email
+      });
+
+      function email_check(){
+        var email = $("#email").val();
+        var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ //regular expression for email validation
+
+        if(email.length == " " ){
+            $('#email_msg').show();
+            $('#email_msg').html("Please Enter Email Address.");//overrides
+            $('#email_msg').focus();
+            $('#email_msg').css("color","red");
+            emailErr = false;
+            return false;
+         }
+        else{
+            $('#email_msg').hide();
+        }
+
+        if (reg.test(email)){
+            $('#email_msg').hide();
+            emailErr = true;
+            return true;
+        }
+        else
+        {
+            $('#email_msg').show();
+            $('#email_msg').html("Please Enter Correct Email Format. e.g: abc@xyz.com");//overrides
+            $('#email_msg').focus();
+            $('#email_msg').css("color","red");
+            emailErr = false;
+            return false;
+                
+        }
+     }
+
+    //</Email_Validation> ends
+
+    //<CNIC_Validation> start
+      $('#cnic_msg').hide();
+    
+      var cnicErr = true;
+
+      $('#cnic').keyup(function(){
+          cnic_check(); //function to check phone number
+      });
+
+      function cnic_check(){
+          var cnic = $("#cnic").val();
+          var reg = '^[0-9]{5}-[0-9]{7}-[0-9]$'
+          ///^[0-9-+]+$/ //regular expression for cnic number validation
+
+          if (cnic.length == " "){
+              $('#cnic_msg').show();
+              $('#cnic_msg').html("Please Enter CNIC Number e.g: 12345-1234567-1");//overrides
+              $('#cnic_msg').focus();
+              $('#cnic_msg').css("color","red");
+              cnicErr = false;
+              return false;
+          }
+          else{
+              $('#cnic_msg').hide();
+          }
+          
+        
+          
+
+          if (cnic.match(reg)){
+              $('#cnic_msg').hide();
+              cnicErr = true;
+              return true;
+          }
+          else if(!cnic.match(reg))
+          {
+              $('#cnic_msg').show();
+              $('#cnic_msg').html("Please Enter CNIC Number in numeric and correct format. e.g: 12345-1234567-1");//overrides
+              $('#cnic_msg').focus();
+              $('#cnic_msg').css("color","red");
+              cnicErr = false;
+              return false;
+              
+          }
+        
+
+        
+    }
+    //</CNIC_Validation> ends
+
+
+    //<Speciality_Validation> starts
+
+      $('#spec_msg').hide();
+
+      var specErr = true;
+
+      $('#spec').keyup(function(){//keyup executes the function by key press
+          spec_check(); //function to validate fname
+      });
+
+      function spec_check(){
+
+          var spec = $('#spec').val();
+
+          if(spec.length == " " ){
+              $('#spec_msg').show();
+              $('#spec_msg').html("Please Enter Doctor's Speciality.");//overrides
+              $('#spec_msg').focus();
+              $('#spec_msg').css("color","red");
+              specErr = false;
+              return false;
+          }
+          else{
+              $('#spec_msg').hide();
+          }
+
+          if(spec.length > 50 ){
+              $('#spec_msg').show();
+              $('#spec_msg').html("Max: 50 Characters allowed.");//overrides
+              $('#spec_msg').focus();
+              $('#spec_msg').css("color","red");
+              specErr = false;
+              return false;
+          }
+          else{
+              $('#spec_msg').hide();
+          }
+      }
+
+    //<Speciality_Validation> ends
+
+    //<Username_Validation> starts
+      $('#username_msg').hide();
+
+        var usernameErr = true;
+
+        $('#username').keyup(function(){//keyup executes the function by key press
+            username_check(); //function to validate fname
+        });
+
+        function username_check(){
+
+            var username = $('#username').val();
+
+            if(username.length == " " ){
+                $('#username_msg').show();
+                $('#username_msg').html("Please Enter Username.");//overrides
+                $('#username_msg').focus();
+                $('#username_msg').css("color","red");
+                usernameErr = false;
+                return false;
+            }
+            else{
+                $('#username_msg').hide();
+            }
+
+            if(username.length > 25 ){
+                $('#username_msg').show();
+                $('#username_msg').html("Max: 25 Characters allowed.");//overrides
+                $('#username_msg').focus();
+                $('#username_msg').css("color","red");
+                usernameErr = false;
+                return false;
+            }
+            else{
+                $('#username_msg').hide();
+            }
+
+            if(username.length < 5 ){
+                $('#username_msg').show();
+                $('#username_msg').html("Min: 5 Characters allowed.");//overrides
+                $('#username_msg').focus();
+                $('#username_msg').css("color","red");
+                usernameErr = false;
+                return false;
+            }
+            else{
+                $('#username_msg').hide();
+            }
+
+            if(username.match(/^\d/)){   //for numeric validation when starting name
+                $('#username_msg').show();
+                $('#username_msg').html("Username should start with alphabet.");//overrides
+                $('#username_msg').focus();
+                $('#username_msg').css("color","red");
+                usernameErr = false;
+                return false;
+            }
+            else{
+                $('#username_msg').hide();
+            }
+
+            if((username.match(/^\W/)) || (username.match("^[_]$")) ){    //for special characters validation when starting name
+                $('#username_msg').show();
+                $('#username_msg').html("Username should start with alphabet.");//overrides
+                $('#username_msg').focus();
+                $('#username_msg').css("color","red");
+                usernameErr = false;
+                return false;
+            }
+            else{
+                $('#username_msg').hide();
+            }
+            
+        }
+    //<Username_Validation> ends
+
+    
+    //<Password_Validation> start
+      $('#password_msg').hide();
+    
+      var passwordErr = true;
+
+      $('#password').keyup(function(){ //function executes by keyup
+        password_check(); //function to check password
+      });
+
+      function password_check(){
+        var password = $("#password").val();
+        var reg = /^(?=.*\d)(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/ //regular expression for password validation
+
+        
+
+        if (password.match(reg)){
+            $('#password_msg').hide();
+            passwordErr = true;
+            return true;
+        }
+        else{
+            $('#password_msg').show();
+            $('#password_msg').html("Please Enter Password with correct format. (min: 8 characters allowed)");//overrides
+            $('#password_msg').focus();
+            $('#password_msg').css("color","red");
+            passwordErr = false;
+            return false;
+            
+        }
+
+        
+      }
+
+    //<Password_Validation> ends
+
+    //<ConfirmPassword_Validation> start
+      $('#con_password_msg').hide();
+
+      var conpasswordErr = true;
+
+      $('#con_password').keyup(function(){
+          conpassword_check(); //function to check if password matches or not
+      });
+
+      function conpassword_check(){
+          var con_password = $('#con_password').val();
+          var password = $("#password").val();
+
+          if(con_password.length == " " ){
+              $('#con_password_msg').show();
+              $('#con_password_msg').html("Please Enter confirmation password..");//overrides
+              $('#con_password_msg').focus();
+              $('#con_password_msg').css("color","red");
+              conpasswordErr = false;
+              return false;
+          }
+          else{
+              $('#con_password_msg').hide();
+          }
+
+          if(password != con_password){
+              $('#con_password_msg').show();
+              $('#con_password_msg').html("Password Does not match.")
+              $('#con_password_msg').focus();
+              $('#con_password_msg').css("color","red");
+              conpasswordErr = false;
+              return false;
+          }
+          else{
+              $('#con_password_msg').hide();
+          }
+
+  }
+
+      //</ConfirmPassword_Validation> ends
+
+
+
+
+
+
+    //<Validation_on_Submit_btn> starts
+      $('#submit-btn').click(function(){
+
+
+        nameErr = true;
+        emailErr = true;
+        cnicErr = true;
+        specErr = true;
+        usernameErr = true;
+        passwordErr = true;
+        conpasswordErr = true;
+
+        
+
+        name_check();
+        email_check();
+        cnic_check();
+        spec_check();
+        username_check();
+        password_check();
+        conpassword_check();
+
+        if((nameErr == true) && (emailErr == true) && (cnicErr == true) && (specErr == true) && (usernameErr == true) && (passwordErr == true) && (conpasswordErr == true)/*&& (lnameErr == true) && (genderErr == true)  && (passwordErr == true) && (conpasswordErr == true) && (phoneErr == true) && (countryErr == true)*/){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+        });
+    //</Validation_on_Submit_btn> ends
+      });
+    </script>
+
+{% endblock %}

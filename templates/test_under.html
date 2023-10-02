@@ -1,0 +1,201 @@
+{% extends 'user_layout.html'  %}
+
+
+{%  block body  %}
+
+<!-- Modal To Test Under-->
+<div class="modal fade" id="createTestUnder" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">{{ lab_test }} Test</h4>
+      </div>
+      <div class="modal-body">
+        <form class="" action="" method="post">
+          {{ form.csrf_token }}
+          <div class="form-group">
+            {{ form.test_name(placeholder="Test name", class="form-control")}}
+            {% if form.test_name.errors %}
+
+              <ul class='errors'>
+
+                {% for error in form.test_name.errors %}
+                    <li class='text-danger'>{{ error }}</li>
+                {% endfor %}
+              </ul>
+
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            {{ form.lower_limit(placeholder="Lower limit", class="form-control")}}
+            {% if form.lower_limit.errors %}
+
+              <ul class='errors'>
+
+                {% for error in form.lower_limit.errors %}
+                    <li class='text-danger'>{{ error }}</li>
+                {% endfor %}
+              </ul>
+
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            {{ form.upper_limit(placeholder="Upper limit", class="form-control")}}
+            <ul class='lesser-error'>
+
+            </ul>
+            {% if form.upper_limit.errors %}
+
+              <ul class='errors'>
+
+                {% for error in form.upper_limit.errors %}
+                    <li class='text-danger'>{{ error }}</li>
+                {% endfor %}
+              </ul>
+
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            {{ form.unit(placeholder="Unit", class="form-control")}}
+            {% if form.unit.errors %}
+
+              <ul class='errors'>
+
+                {% for error in form.unit.errors %}
+                    <li class='text-danger'>{{ error }}</li>
+                {% endfor %}
+              </ul>
+
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            {{ form.unit_price(placeholder="Unit price", class="form-control")}}
+            {% if form.unit_price.errors %}
+
+              <ul class='errors'>
+
+                {% for error in form.unit_price.errors %}
+                    <li class='text-danger'>{{ error }}</li>
+                {% endfor %}
+              </ul>
+
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            {{ form.taxes(placeholder="Taxes", class="form-control")}}
+            {% if form.taxes.errors %}
+
+              <ul class='errors'>
+
+                {% for error in form.taxes.errors %}
+                    <li class='text-danger'>{{ error }}</li>
+                {% endfor %}
+              </ul>
+
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <input class='btn btn-info' type="Submit" name="" value="Submit">
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% if request.method == 'POST'  and not(form.validate()) %}
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+     $('#createTestUnder').modal('show');
+  });
+</script>
+{% else %}
+<script type="text/javascript">
+$(document).ready(function(){
+
+$('form').submit(function(e)
+{
+    lower_limit = $('#lower_limit').val();
+    upper_limit =  $('#upper_limit').val();
+
+    if(lower_limit >= upper_limit)
+    {
+      e.preventDefault();
+      $('.lesser-error').html('<li class="text-danger">Upper limit should be greater than lower limit</li>');
+    }
+
+});
+
+});
+
+</script>
+
+{% endif %}
+
+
+<!-- BreadCrumb -->
+<section id="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="active"><a class='' href="/lab_tests">Type of Lab Tests</a> / {{ lab_test }} </li>
+      </ol>
+</section>
+
+
+<!-- Create Button -->
+<a href="#" class='btn btn-primary' data-toggle="modal" data-target="#createTestUnder">Create</a>
+<hr>
+
+
+
+<!-- Table -->
+<div class='table-responsive'>
+<table class="table table-striped table-condensed">
+    <tr>
+        <th>ID</th>
+        <th>Test</th>
+        <th>Lower Limit</th>
+        <th>Upper Limit</th>
+        <th>Unit</th>
+        <th></th>
+    </tr>
+
+
+    {% for test in tests %}
+    <tr>
+        <td>{{ test.id }}</td>
+        <td>{{ test.test_name }}</td>
+        <td>{{ test.lower_limit }}</td>
+        <td>{{ test.upper_limit }}</td>
+        <td>{{ test.unit }}</td>
+        <td>
+          <a href="/add_lab_report/{{ test.id }}" class="btn btn-default">Add Report</a>
+          <a href="/add_lab_request/{{ test.id }}" class="btn btn-default">Add Request</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+
+
+
+
+</table>
+</div>
+
+
+
+
+
+{% endblock %}

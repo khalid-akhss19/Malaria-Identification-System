@@ -1,0 +1,499 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+	padding-top: 50px;
+}
+
+.navbar-inverse {
+	background-color: #FFFFFF;
+	border-color: #ffffff;
+	box-shadow: 0px 4px 5px #000C57, 0px 2px 3px #000524;
+	font-weight: normal;
+}
+
+/* .panel .panel-default
+{
+  margin-top: 40px;
+} */
+
+.navbar-inverse {
+	padding: 20px;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #000C57;
+	font-size: 20px;
+	font-weight: 800;
+}
+
+.navbar-inverse .navbar-brand:hover,
+  .navbar-inverse .navbar-brand:focus {
+	color: #6E759F;
+}
+
+.navbar-inverse .navbar-text {
+	color: #555555;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    /* border-left: 0.5px solid #000C57; */
+	font-size: 18px;
+    /* margin-top: 10px;
+    padding-left: 20px; */
+	color: #6E759F;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+  .navbar-inverse .navbar-nav > li > a:focus {
+	color: #000C57;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+  .navbar-inverse .navbar-nav > .active > a:hover,
+  .navbar-inverse .navbar-nav > .active > a:focus {
+	color: #555555;
+	background-color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+  .navbar-inverse .navbar-nav > .open > a:hover,
+  .navbar-inverse .navbar-nav > .open > a:focus {
+	color: #555555;
+	background-color: #ffffff;
+}
+
+.navbar-inverse .navbar-toggle {
+	border-color: #ffffff;
+}
+
+.navbar-inverse .navbar-toggle:hover,
+  .navbar-inverse .navbar-toggle:focus {
+	background-color: #ffffff;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+	background-color: #555555;
+}
+
+.navbar-inverse .navbar-collapse,
+  .navbar-inverse .navbar-form {
+	border-color: #555555;
+}
+
+.navbar-inverse .navbar-link {
+	color: #555555;
+}
+
+.navbar-inverse .navbar-link:hover {
+	color: #555555;
+}
+
+@media (max-width: 767px) {
+	.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+		color: #555555;
+	}
+
+	.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+		color: #555555;
+	}
+
+	.navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+		color: #555555;
+		background-color: #ffffff;
+	}
+}
+  
+  /*
+   * Global add-ons
+   */
+  
+.sub-header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+  
+  /*
+   * Top navigation
+   * Hide default border to remove 1px line.
+   */
+.navbar-fixed-top {
+	border: 0;
+}
+  /*
+   * Sidebar
+   */
+  /* Hide for mobile, show later */
+.sidebar {
+	display: none;
+}
+
+@media (min-width: 768px) {
+	.sidebar {
+		position: fixed;
+		top: 80px;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
+		display: block;
+		padding: 20px;
+		overflow-x: hidden;
+		overflow-y: auto;
+ /* Scrollable contents if viewport is shorter than content. */
+		background-color: #000C57 !important;
+		box-shadow: 0px 4px 3px #000C57, 3px 0px 4px #000C57(239, 239, 239, 0.5);
+		border-radius: 0px 6px 6px 0px;
+		border-right: 1px solid #eee;
+	}
+}
+  
+  /* Sidebar navigation */
+.nav-sidebar {
+	margin-right: -21px;
+ /* 20px padding + 1px border */
+	margin-bottom: 20px;
+	margin-left: -20px;
+}
+
+.nav-sidebar > li > a {
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.nav-sidebar > .active > a,
+  .nav-sidebar > .active > a:hover,
+  .nav-sidebar > .active > a:focus {
+    /* color: #b83b7f; */
+	background-color: #b3b3b352 !important;
+	border-radius: 10px;
+	font-size: 20px;
+}
+
+ul.nav > li > a:hover,
+ul.nav > li > a:focus {
+	background-color: transparent !important;
+	color: #fff;
+}
+
+.sidebariconn {
+	color: rgb(245, 245, 245) !important;
+	font-size: 20px;
+}
+  /*
+   * Main content
+   */
+  
+.main {
+	padding: 20px;
+	margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+	.main {
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+}
+
+.main .page-header {
+	margin-top: 0;
+}
+  
+  
+  /*
+   * Placeholder dashboard ideas
+   */
+  
+.placeholders {
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.placeholders h4 {
+	margin-bottom: 0;
+}
+
+.placeholder {
+	margin-bottom: 20px;
+}
+
+.placeholder img {
+	display: inline-block;
+	border-radius: 50%;
+}
+
+#user-profile h3 {
+	margin-top: 10px;
+}
+
+#user-profile h3 + p {
+	font-size: 16px;
+}
+
+#user-profile h3 + p + button {
+	font-size: 16px;
+}
+
+#user-profile label {
+	font-weight: normal;
+	font-size: 16px;
+	margin-bottom: 8px;
+}
+
+#user-profile .row {
+	margin-top: 20px;
+}
+
+#user-profile .nav {
+	margin-top: 20px;
+}
+
+#user-profile ul.nav-tabs li a {
+	font-size: 16px;
+}
+
+#user-profile input[type='text'],#user-profile input[type='email'] {
+	font-size: 16px;
+	padding: 18px 14px;
+	outline: none;
+	border: 1px solid #e0e0e0;
+	box-shadow: none;
+}
+
+#profile-image {
+	width: 140px;
+	margin-right: 20px;
+	height: 140px;
+}
+
+.btn-primary-4 {
+	color: #fff;
+	background-color: #344CAE;
+	border-color: #0F0F2B;
+}
+
+.panel-title {
+	font-size: 20px;
+}
+
+.btn-primary-4:hover
+  .panel-heading {
+	color: #fff;
+	background-color: #344CAE;
+	border-color: #0F0F2B;
+}
+
+.btn-primary-4.focus,.btn-primary-4:focus {
+	box-shadow: 0 0 0 .2rem #344CAE;
+}
+
+.btn-primary-4.disabled,.btn-primary-4:disabled {
+	color: #fff;
+	background-color: #344CAE;
+	border-color: #0F0F2B;
+}
+
+.btn-primary-4:not(:disabled):not(.disabled).active,.btn-primary-4:not(:disabled):not(.disabled):active,.show>.btn-primary-4.dropdown-toggle {
+	color: #fff;
+	background-color: #344CAE;
+	border-color: #0F0F2B;
+}
+
+.btn-primary-4:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus {
+	box-shadow: 0 0 0 .2rem rgba(95, 127, 161, 0.5);
+}
+
+.no-label label {
+	display: none;
+}
+
+#classify {
+	border: 1px solid #f4f4f4;
+	border-radius: 6px;
+	padding: 10px 170px 10px 30px;
+	width: 75%;
+}
+
+#gpd-history {
+	border: 1px solid #f4f4f4;
+}
+
+.cardsquare {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+}
+
+.cardsqrtext {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding-left: 8px;
+}
+
+.cardsqrnum {
+	font-size: 22px;
+}
+
+.well-primary {
+	color: #6E759F;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    /* background-color:#6E759F; */
+    /* border-color:#000C57; */;
+}
+
+.well-success {
+	color: #6E759F;
+    /* background-color:#6E759F; */
+    /* border-color:#000C57; */
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.well-warning {
+	color: #6E759F;
+  /* background-color:#6E759F; */
+  /* border-color:#000C57; */
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.light-shadow {
+	box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+	border-radius: 15px;
+}
+  /* .panel-heading {
+   background:#000C57;color:#fff; padding: 20px 15px;
+  } */
+.my-panel-primary .panel-heading {
+	background: #000C57;
+	color: #fff;
+}
+  
+  /* Utilities */
+.sm {
+	font-size: 1rem;
+}
+
+.md {
+	font-size: 2rem;
+}
+
+.lg {
+	font-size: 3rem;
+}
+
+.xl {
+	font-size: 4rem;
+}
+  
+  /* Margin */
+.my-1 {
+    /* rem multiplies the font size of the root element by default
+    html tag has font-size:16px; unless you change it.*/
+	margin: 1rem 0;
+}
+
+.my-2 {
+	margin: 1.5rem 0;
+}
+
+.my-3 {
+    /* 2 x 16 = 32px */
+	margin: 2.5rem 0;
+}
+
+.my-4 {
+    /* 4 x 16 = 64*/
+	margin: 3rem 0;
+}
+
+.my-5 {
+	margin: 4rem 0;
+}
+
+.m-0 {
+	margin: 0;
+}
+
+.m-1 {
+    /* rem multiplies the font size of the root element by default
+    html tag has font-size:16px; unless you change it.*/
+	margin: 1rem;
+}
+
+.m-2 {
+	margin: 1.5rem;
+}
+
+.m-3 {
+    /* 2 x 16 = 32px */
+	margin: 2rem;
+}
+
+.m-4 {
+    /* 4 x 16 = 64*/
+	margin: 3rem;
+}
+
+.m-5 {
+	margin: 4rem;
+}
+  
+  
+  /* Padding */
+.py-1 {
+    /* rem multiplies the font size of the root element by default
+    html tag has font-size:16px; unless you change it.*/
+	padding: 1rem 0;
+}
+
+.py-2 {
+	padding: 1.5rem 0;
+}
+
+.py-3 {
+    /* 2 x 16 = 32px */
+	padding: 2rem 0;
+}
+
+.py-4 {
+	padding: 3rem 0;
+}
+
+.py-5 {
+    /* 4 x 16 = 64*/
+	padding: 4rem 0;
+}
+
+.p-0 {
+	padding: 0;
+}
+
+.p-1 {
+	padding: 1rem;
+}
+
+.p-2 {
+	padding: 1.5rem;
+}
+
+.p-3 {
+    /* 2 x 16 = 32px */
+	padding: 2rem;
+}
+
+.p-4 {
+	padding: 3rem;
+}
+
+.p-5 {
+    /* 4 x 16 = 64*/
+	padding: 4rem;
+}
+
+@media screen and (max-width: 1200px) {
+	#classify {
+		width: 100%;
+		padding: 10px 30px 10px 10px;
+	}
+}

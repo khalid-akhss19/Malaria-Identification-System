@@ -1,0 +1,296 @@
+{% extends 'user_layout.html' %} {% block patients %}<div class="container table-bordered" style="width:80%;border-radius:4px"><h1>Edit Patient</h1>{% from "includes/_formhelpers.html" import render_field %}<form method="POST" action=""><div class="form-group">{{ render_field(form.p_name, class="form-control", id="pname") }}<p id="pname_msg"></p></div><div class="form-group">{{ render_field(form.p_dob, class="form-control", id="date") }}<p id="date_msg"></p></div><div class="form-group">{{ render_field(form.p_age, class="form-control", id="age") }}<p id="age_msg"></p></div><div class="form-group">{{ render_field(form.p_docname, class="form-control", id="doc") }}<p id="doc_msg"></p></div><div class="form-group">{{ render_field(form.p_gender, class="form-control",id="gender") }}<p id="gender_msg"></p></div><p><input class="btn btn-primary" type="submit" value="Submit" id="submit-btn"></p></form></div><script>$(document).ready(function(){
+
+    //Patient name validation
+     // <Patient name validation> start
+    $('#pname_msg').hide();
+
+    var pnameErr = true;
+
+    $('#pname').keyup(function(){//keyup executes the function by key press
+        pname_check(); //function to validate fname
+    });
+
+    function pname_check(){
+
+        var pname = $('#pname').val();
+
+        if(pname.length == " " ){
+            $('#pname_msg').show();
+            $('#pname_msg').html("Please Enter Full Name.");//overrides
+            $('#pname_msg').focus();
+            $('#pname_msg').css("color","red");
+            pnameErr = false;
+            return false;
+        }
+        else{
+            $('#pname_msg').hide();
+        }
+
+        if(pname.length > 50 ){
+            $('#pname_msg').show();
+            $('#pname_msg').html("Max: 50 Characters allowed.");//overrides
+            $('#pname_msg').focus();
+            $('#pname_msg').css("color","red");
+            pnameErr = false;
+            return false;
+        }
+        else{
+            $('#pname_msg').hide();
+        }
+
+        if(pname.match(/^\d/)){   //for numeric validation when starting name
+            $('#pname_msg').show();
+            $('#pname_msg').html("Name should start with alphabet.");//overrides
+            $('#pname_msg').focus();
+            $('#pname_msg').css("color","red");
+            pnameErr = false;
+            return false;
+        }
+        else{
+            $('#pname_msg').hide();
+        }
+
+        if((pname.match(/^\W/)) || (pname.match("^[_]$")) ){    //for special characters validation when starting name
+            $('#pname_msg').show();
+            $('#pname_msg').html("Name should start with alphabet.");//overrides
+            $('#pname_msg').focus();
+            $('#pname_msg').css("color","red");
+            pnameErr = false;
+            return false;
+        }
+        else{
+            $('#pname_msg').hide();
+        }
+
+    }
+            $('#date_msg').hide();
+
+var dateErr = true;
+
+$('#date').keyup(function(){
+date_check(); //function to check phone number
+});
+
+function date_check(){
+
+var date = $("#date").val();
+var reg = '^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$' //regular expression for date validation
+var today = new Date();
+var cDate = today.getDate() +
+"/" +
+(today.getMonth() + 1) +
+"/" +
+today.getFullYear();
+const convertToDate = (d) => {
+const [day, month, year] = d.split("/");
+return new Date(year, month - 1, day);
+};
+
+if (date.length == " "){
+$('#date_msg').show();
+$('#date_msg').html("Please Enter DOB. eg dd/mm/yyyy");//overrides
+$('#date_msg').focus();
+$('#date_msg').css("color","red");
+dateErr = false;
+return false;
+}
+else if(convertToDate(cDate) < convertToDate(date)){
+$('#date_msg').show();
+$('#date_msg').html("Date of Birth is greater than current date");//overrides
+$('#date_msg').focus();
+$('#date_msg').css("color","red");
+dateErr = false;
+return false;
+}
+else{
+$('#date_msg').hide();
+}
+if (date.match(reg)){
+$('#date_msg').hide();
+dateErr = true;
+return true;
+}
+else if(!date.match(reg))
+{
+$('#date_msg').show();
+$('#date_msg').html("Please Enter Correct Date Format. eg mm/dd/yyyy");//overrides
+$('#date_msg').focus();
+$('#date_msg').css("color","red");
+dateErr = false;
+return false;
+
+}
+
+
+
+}
+//<Date_validation_ends>
+
+
+
+    //<Age_Validation> starts
+
+  
+        function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDat()))
+        { age--;}
+        return age;
+        }
+        $('#date').keyup(function(){
+            var date = document.getElementById("date").value;
+            
+            
+            var dat = getAge(date);
+            document.getElementById("age").value = dat;
+            
+        });
+
+    //<doctor_name_Validation> starts
+
+        $('#doc_msg').hide();
+
+        var docErr = true;
+
+        $('#doc').keyup(function(){//keyup executes the function by key press
+            doc_check(); //function to validate fname
+        });
+
+        function doc_check(){
+
+            var doc = $('#doc').val();
+
+            if(doc.length == " " ){
+                $('#doc_msg').show();
+                $('#doc_msg').html("Please Enter Full Name.");//overrides
+                $('#doc_msg').focus();
+                $('#doc_msg').css("color","red");
+                docErr = false;
+                return false;
+            }
+            else{
+                $('#doc_msg').hide();
+            }
+
+            if(doc.length > 50 ){
+                $('#doc_msg').show();
+                $('#doc_msg').html("Max: 50 Characters allowed.");//overrides
+                $('#doc_msg').focus();
+                $('#doc_msg').css("color","red");
+                docErr = false;
+                return false;
+            }
+            else{
+                $('#doc_msg').hide();
+            }
+
+            if(doc.match(/^\d/)){   //for numeric validation when starting name
+                $('#doc_msg').show();
+                $('#doc_msg').html("Name should start with alphabet.");//overrides
+                $('#doc_msg').focus();
+                $('#doc_msg').css("color","red");
+                docErr = false;
+                return false;
+            }
+            else{
+                $('#doc_msg').hide();
+            }
+
+            if((doc.match(/^\W/)) || (doc.match("^[_]$")) ){    //for special characters validation when starting name
+                $('#doc_msg').show();
+                $('#doc_msg').html("Name should start with alphabet.");//overrides
+                $('#doc_msg').focus();
+                $('#doc_msg').css("color","red");
+                docErr = false;
+                return false;
+            }
+            else{
+                $('#doc_msg').hide();
+            }
+
+        }
+
+    //<doctor_name_Validation> ends
+
+
+    //Gender Validation starts
+    $('#gender_msg').hide();
+
+    var genderErr = true;
+
+    $('#gender').keyup(function(){//keyup executes the function by key press
+        gender_check(); //function to validate fname
+    });
+
+    function gender_check(){
+
+        var gender = $('#gender').val();
+
+        if(gender.length == " " ){
+            $('#gender_msg').show();
+            $('#gender_msg').html("Please Enter Patient's Gender.");//overrides
+            $('#gender_msg').focus();
+            $('#gender_msg').css("color","red");
+            genderErr = false;
+            return false;
+        }
+        else{
+            $('#gender_msg').hide();
+        }
+
+        if(gender == "male" || gender == "MALE" || gender == "Male"){
+            genderErr = true;
+            return true;
+            $('#gender_msg').hide();
+
+        }
+        else if(gender == "female" || gender == "FEMALE" || gender == "Female"){
+            genderErr = true;
+            return true;
+            $('#gender_msg').hide();
+
+        }else{
+            $('#gender_msg').show();
+            $('#gender_msg').html("Please enter correct gender i.e Male or Female.");//overrides
+            $('#gender_msg').focus();
+            $('#gender_msg').css("color","red");
+            genderErr = false;
+            return false;
+        }
+
+
+
+    }
+
+    //Gender Validation end
+
+    //<Validation_on_Submit_btn> starts
+    $('#submit-btn').click(function(){
+
+        pnameErr = true;
+        dateErr = true;
+        ageErr = true;
+        docErr = true;
+        genderErr = true;
+
+        pname_check();
+        date_check();
+        age_check();
+        doc_check();
+        gender_check();
+
+
+        if((pnameErr == true) && (dateErr == true) && (ageErr==true) && (docErr == true) && (genderErr == true)){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+        });
+        //</Validation_on_Submit_btn> ends
+
+            });</script>{% endblock %}

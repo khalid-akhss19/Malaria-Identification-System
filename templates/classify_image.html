@@ -1,0 +1,40 @@
+{% extends 'user_layout.html' %}
+
+{% block body %}
+  <div class='container' id='classify'>
+    <h2 style='margin-bottom:25px;'>Classify Disease<small> <P>Image format must be png, jpg or jpeg</p></small></h2>
+
+    <form action='' method="post" enctype="multipart/form-data">
+
+          <div class="row">
+             <div class="col-md-6">
+
+             </div>
+             <div class="col-md-6">
+               <div class="form-group pull pull-right">
+                 <img class='img-rounded' src="{{ url_for('static',filename=full_filename) }}" width="140" height="140">
+               </div>
+             </div>
+          </div>
+
+          <div class="form-group">
+            <input type = "file" name="image_upload" id="image_upload" />
+          </div>
+
+          <div class='form-group'>
+            {% if pred %}
+                <h4>Classify : {{ pred }}</h4>
+            {% endif %}
+          </div>
+
+            <!-- input type = "text" placeholder = "Upload Image" name="image_name" id="image_name" / -->
+
+            <button id="submit" type="submit" class="btn btn-primary">Classify</button>
+
+            {% if pred %}
+            <a href="/eczpso_pdf/{{disease_id}}" target='_blank' class='btn btn-danger'>Generate PDF</a>
+            {% endif %}
+
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'user_layout.html' %}
+
+{% block patients %}
+
+    <div class="container table-bordered">
+        <!-- <h1>Hi Dr. {{session.username}}</h1> -->
+        <h1>Patients </h1>
+        <p>Here you can Add/Delete/Edit Patient's Details</p>
+
+    </div>
+    <br>
+    <div class="container">
+        <a class="btn btn-info" href="/add_patient">Add Patient</a>
+    </div>
+    <hr>
+  <div class='table-responsive'>
+    <table class="table table-striped table-condensed">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Age</th>
+            <th>Doctor's Name</th>
+            <th>Gender</th>
+            <th>Added On</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        {% for patient in patients %}
+            <tr>
+                <td>{{patient.p_id2}}</td>
+                <td>{{patient.p_name}}</td>
+                <td>{{patient.p_dob}}</td>
+                <td>{{patient.p_age}}</td>
+                <td>{{patient.p_docname}}</td>
+                <td>{{patient.p_gender}}</td>
+                <td>{{patient.time_added}}</td>
+                <td><a href="edit_patient/{{patient.p_id}}" class="btn btn-default pull-right">Edit</a></td>
+                <td>
+
+                    <form class='delete-form' action="{{url_for('delete_patient', id=patient.p_id)}}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+
+                </td>
+
+            </tr>
+        {% endfor %}
+
+    </table>
+  </div>
+{% endblock %}
