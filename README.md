@@ -8,6 +8,11 @@ Welcome to our final year project, the "Malaria Identification System Using Deep
 
 We are building a cutting-edge web-based application that harnesses the power of image processing and deep learning algorithms to detect infected cells from images of thin blood smears on standard microscope slides. By automating the diagnosis process, we not only reduce the workload on laboratories and doctors but also eliminate errors caused by faulty equipment and human judgment.
 
+## Documentation and User Guide
+- [Documentation](https://drive.google.com/file/d/140z31hW83SHYnrqMAkuv7DImIJaaEYuZ/view?usp=sharing)
+- [User Manual](https://drive.google.com/file/d/10lof8BOd-59U1qoX1_HwLgsQxBYVelTL/view?usp=sharing)
+
+
 ## Contributors
 
 - [Khalid Hussain](https://github.com/khalid-akhss19)
