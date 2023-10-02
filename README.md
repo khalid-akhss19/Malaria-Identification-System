@@ -10,5 +10,6 @@ We are building a cutting-edge web-based application that harnesses the power of
 
 ## Contributors
 
-- Khalid Hussain 
-- Muhammad Arham Khan
+- [Khalid Hussain](https://github.com/khalid-akhss19)
+- [Muhammad Arham Khan](https://github.com/arham-kk)
+
