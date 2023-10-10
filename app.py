@@ -482,11 +482,11 @@ def delete_patient(id):
     flash('Patient Deleted','success')
     return redirect(url_for('patients'))
 
-# Patient EczPso Classification History
+# Patient Classification History
 @app.route('/history/<string:id>')
 @is_logged_in
 @is_physician_in
-def eczpso_history(id):
+def mal_history(id):
     user_id = session['id']
     cur = mysql.connection.cursor()
     result = cur.execute("SELECT * FROM patients WHERE p_id=%s AND user_id=%s",(id,user_id))
@@ -501,11 +501,11 @@ def eczpso_history(id):
 
     if result > 0:
         cur.close()
-        return render_template('eczpso_history.html', history=history)
+        return render_template('mal_history.html', history=history)
     else:
         cur.close()
         msg = "No History Found"
-        return render_template('eczpso_history.html' , msg=msg)
+        return render_template('mal_history.html' , msg=msg)
 
 @app.route('/classify')
 @is_logged_in
@@ -567,10 +567,10 @@ def classify_image(id):
               cur.close()
               return render_template('classify_image.html', full_filename = full_filename, pred = pred,prob=prob,disease_id=disease_id)
 
-@app.route('/eczpso_pdf/<string:id>')
+@app.route('/mal_pdf/<string:id>')
 @is_logged_in
 @is_physician_in
-def eczpso_pdf(id):
+def mal_pdf(id):
     user_id = session['id']
     cur = mysql.connection.cursor()
     result = cur.execute("SELECT * FROM disease WHERE disease_id=%s",[id])
@@ -598,7 +598,7 @@ def eczpso_pdf(id):
 
     src = os.path.dirname(os.path.abspath(__file__))+'/'+data['image']
     app.logger.info(src)
-    rendered = render_template('eczpso_pdf.html',id=id,full_filename=src,name=name,dob=dob,age=age,gender=gender,time_added=create_date,pred=disease_name)
+    rendered = render_template('mal_pdf.html',id=id,full_filename=src,name=name,dob=dob,age=age,gender=gender,time_added=create_date,pred=disease_name)
     options = {
   "enable-local-file-access": None
     }
