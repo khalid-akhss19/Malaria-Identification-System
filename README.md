@@ -5,12 +5,12 @@
 This is a web application project for identifying malaria using Flask. The application is designed to provide a user-friendly interface for users to upload and analyze blood smear images to detect the presence of malaria parasites. The project also uses XAMPP for database management and includes a `db.sql` file that can be imported into the MySQL server in XAMPP for database operations.
 
 <div style="display: flex; justify-content: space-between;">
-    <img src="./public/image1.jpeg" width="200" />
-    <img src="./public/image2.jpeg" width="200" />
+    <img src="./public/image1.jpeg" width="350" />
+    <img src="./public/image2.jpeg" width="350" />
 </div>
 <div style="display: flex; justify-content: space-between;">
-    <img src="./public/image3.jpeg" width="200" />
-    <img src="./public/image4.png" width="200" />
+    <img src="./public/image3.jpeg" width="350" />
+    <img src="./public/image4.png" width="350" />
 </div>
 
 ## Features
